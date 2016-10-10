@@ -3,42 +3,36 @@
 /**
  *
  */
-
-/**
- * Submit function for internet_reception_page_form.
- */
-/*function internet_reception_form_submit($form, &$form_state) {
-  internet_reception_mail_send($form_state['values']);
-}*/
-
 /**
  * Validate function for internet_reception_page_form.
+ * @param $form
+ * @param $form_state
  */
-/*function internet_reception_form_validate($form, $form_state) {
-  switch (gmp_sign($form_state['values']['age'])) {
-    case '0':
-      form_set_error('age', t('Age is not equal to 0'));
-      break;
-
-    case '-1':
-      form_set_error('age', t('Age can not be negative'));
-      break;
+function internet_reception_form_validate($form, $form_state) {
+  if ($form_state['values']['age'] <= -1) {
+    form_set_error('age', t('Age can not be negative'));
   }
-  if (is_numeric($form_state['value']['full_name'])) {
-    form_set_error('full_name', 'Not numbers');
+  if ($form_state['values']['age'] == 0) {
+    form_set_error('age', t('Age is not equal to 0'));
   }
-}*/
+  if (ctype_alnum($form_state['values']['age'] == 0)) {
+    form_set_error('age', t('Only numbers!'));
+  }
+  if (ctype_digit($form_state['values']['full_name'])) {
+    form_set_error('full_name', t('Only text!'));
+  }
+}
 
 /**
  * Send email function for internet reception.
  * @param $form_values
  */
-/*function internet_reception_mail_send($form_values) {
+function internet_reception_mail_send($form_values) {
   global $user;
   $module = 'internet_reception';
   $key = 'internet_reception';
-  $to = variable_get('site_mail', ini_get('sendmail_from'));
-  $from = $user->mail;
+  $to = $user->mail;
+  $from = variable_get('site_mail', ini_get('sendmail_from'));
   $params = $form_values;
   $language = language_default();
 
@@ -50,4 +44,13 @@
   else {
     drupal_set_message(t('There was a problem sending your message and it was not sent.'), 'error');
   }
-}*/
+}
+
+/**
+ * Submit function for internet_reception_page_form.
+ * @param $form
+ * @param $form_state
+ */
+function internet_reception_form_submit($form, &$form_state) {
+  internet_reception_mail_send($form_state['values']);
+}
