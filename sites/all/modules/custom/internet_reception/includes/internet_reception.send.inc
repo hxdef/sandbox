@@ -1,12 +1,12 @@
 <?php
 
 /**
- *
+ * @file
+ * Check the fields and send mail.
  */
+
 /**
  * Validate function for internet_reception_page_form.
- * @param $form
- * @param $form_state
  */
 function internet_reception_form_validate($form, $form_state) {
   if ($form_state['values']['age'] <= -1) {
@@ -25,7 +25,7 @@ function internet_reception_form_validate($form, $form_state) {
 
 /**
  * Send email function for internet reception.
- * @param $form_values
+ * @param $form_values The constructed form values array of the submitted form.
  */
 function internet_reception_mail_send($form_values) {
   global $user;
@@ -48,9 +48,9 @@ function internet_reception_mail_send($form_values) {
 
 /**
  * Submit function for internet_reception_page_form.
- * @param $form
- * @param $form_state
+ * @param $form An array of form elements
+ * @param $form_state An array which stores information about the form.
  */
-function internet_reception_form_submit($form, &$form_state) {
+function internet_reception_form_submit($form ,&$form_state) {
   internet_reception_mail_send($form_state['values']);
 }
