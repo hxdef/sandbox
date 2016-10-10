@@ -1,4 +1,3 @@
 name = Internet reception
-description = description
-version = 7.x-1.x-dev
+description = This feedback module.
 core = 7.x

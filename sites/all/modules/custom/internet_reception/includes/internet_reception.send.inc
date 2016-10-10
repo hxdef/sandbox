@@ -13,7 +13,7 @@ function internet_reception_mail_send($form_values) {
   global $user;
   $module = 'internet_reception';
   $key = 'internet_reception';
-  $to = $user->mail;
+  $to = 'feedback@form.com';
   $from = variable_get('site_mail', ini_get('sendmail_from'));
   $params = $form_values;
   $language = language_default();
