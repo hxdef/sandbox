@@ -8,7 +8,7 @@
 /**
  * Send email function for internet reception.
  * @param array $form_values
- *    The constructed form values array of the submitted form.
+ *    The constructed q form values array of the submitted form.
  */
 function internet_reception_mail_send($form_values) {
   global $user;
