@@ -6,7 +6,7 @@
  */
 
 /**
- * Comment.
+ * Create form.
  *
  * @return array
  *    Returned form elements.
@@ -57,7 +57,6 @@ function internet_reception_content_form_submit($form, &$form_state) {
   /*$from = variable_get('site_mail', ini_get('sendmail_from'));*/
   $params = $form_values;
   $language = language_default();
-
   $send = TRUE;
   $result = drupal_mail($module, $key, $to, $language, $params/*, $from*/, $send);
   if ($result['result'] == TRUE && $send == TRUE) {
