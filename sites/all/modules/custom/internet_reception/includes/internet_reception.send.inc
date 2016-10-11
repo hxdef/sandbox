@@ -7,7 +7,8 @@
 
 /**
  * Send email function for internet reception.
- * @param array $form_values The constructed form values array of the submitted form.
+ * @param array $form_values
+ *    The constructed form values array of the submitted form.
  */
 function internet_reception_mail_send($form_values) {
   global $user;
@@ -30,9 +31,11 @@ function internet_reception_mail_send($form_values) {
 
 /**
  * Submit function for internet_reception_form.
- * @param array $form form elements
- * @param array $form_state stories information about the form.
+ * @param array $form
+ *    Form elements.
+ * @param array $form_state
+ *    Stories information about the form.
  */
-function internet_reception_form_submit($form ,&$form_state) {
+function internet_reception_form_submit($form, &$form_state) {
   internet_reception_mail_send($form_state['values']);
 }

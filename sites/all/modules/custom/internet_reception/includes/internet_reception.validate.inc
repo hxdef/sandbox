@@ -7,8 +7,10 @@
 
 /**
  * Validate function for internet_reception_page_form.
- * @param array $form form elements
- * @param array $form_state An array which stores information about the form.
+ * @param array $form
+ *    Form elements.
+ * @param array $form_state
+ *    An array which stores information about the form.
  */
 function internet_reception_form_validate($form, $form_state) {
 /*  if ($form_state['values']['age'] <= -1) {
