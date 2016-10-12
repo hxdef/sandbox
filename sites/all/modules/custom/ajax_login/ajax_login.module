@@ -44,7 +44,7 @@ function ajax_login_form_alter(&$form, &$form_state, $form_id) {
         '#markup' => '<div id="ajax_login-login-messages"></div>',
       );
       $form['actions']['submit']['#ajax'] = array(
-        'callback' => 'ajax_register_login_ajax_callback',
+        'callback' => 'ajax_login_login_ajax_callback',
       );
       break;
   }
