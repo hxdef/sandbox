@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * @file
+ * Reworked standard login form to ajax.
+ */
+
+module_load_include('inc', 'ajax_login', 'includes/ajax_login.callback');
+/**
  * Implements hook_form_alter().
  */
 function ajax_login_form_alter(&$form, &$form_state, $form_id) {
@@ -26,34 +32,9 @@ function ajax_login_form_alter(&$form, &$form_state, $form_id) {
         '#items' => $items,
       );
     case 'user_login':
-      $form['messages'] = array(
-        '#markup' => '<div id="ajax-login-messages"></div>',
-      );
       $form['actions']['submit']['#ajax'] = array(
         'callback' => 'ajax_login_ajax_callback',
       );
       break;
   }
-}
-
-/**
- * Add user.pages.inc for enabling user_pass_validate() and user_pass_submit().
- */
-function ajax_login_user_pass_after_build($form, &$form_state) {
-  module_load_include('pages.inc', 'user');
-  return $form;
-}
-
-/**
- * Ajax callback for user login form.
- */
-function ajax_login_ajax_callback($form, &$form_state) {
-  $commands = array();
-  if (!form_get_error()) {
-    drupal_set_message(t('Hello! To see the site as a registered user, click on <a href="/">link</a>.'));
-    hide($form);
-  }
-  /* do something */
-  $commands[] = ajax_command_html('#ajax-login-messages', theme('status_messages'));
-  return array('#type' => 'ajax', '#commands' => $commands);
 }
