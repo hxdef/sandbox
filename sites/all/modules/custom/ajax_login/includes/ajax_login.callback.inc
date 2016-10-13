@@ -10,7 +10,6 @@
  */
 function ajax_login_ajax_callback(&$form, &$form_state) {
   module_load_include('pages.inc', 'user  ');
-  drupal_process_form($form['#form_id'], $form, $form_state);
   $commands = array();
   if (user_is_logged_in()) {
     $commands[] = ajax_command_html('#user-login-form', 'Hello! To see the site as a registered user, click on <a href="/">link</a>');
