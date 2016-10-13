@@ -1,26 +1,12 @@
 <?php
 
 /**
- * Implements hook_menu().
- */
-function ajax_login_menu() {
-  $items = array();
-  $items['ajax_login/'] = array(
-    'title' => 'Request new password',
-    'page callback' => 'ajax_login_ajax_page_callback',
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/ajax_login.pages.inc',
-  );
-  return $items;
-}
-
-/**
  * Implements hook_form_alter().
  */
 function ajax_login_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'user_login_block':
-      $registration_allowed = variable_get('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
+      $registration_allowed = variable_get('user_register');
       if ($registration_allowed) {
         $user_register_link = array(
           '#type' => 'link',
@@ -41,10 +27,10 @@ function ajax_login_form_alter(&$form, &$form_state, $form_id) {
       );
     case 'user_login':
       $form['messages'] = array(
-        '#markup' => '<div id="ajax_login-login-messages"></div>',
+        '#markup' => '<div id="ajax-login-messages"></div>',
       );
       $form['actions']['submit']['#ajax'] = array(
-        'callback' => 'ajax_login_login_ajax_callback',
+        'callback' => 'ajax_login_ajax_callback',
       );
       break;
   }
@@ -61,12 +47,13 @@ function ajax_login_user_pass_after_build($form, &$form_state) {
 /**
  * Ajax callback for user login form.
  */
-function ajax_login_login_ajax_callback() {
+function ajax_login_ajax_callback($form, &$form_state) {
   $commands = array();
-  if (!form_get_errors()) {
-    drupal_set_message(t('Hello! To see the site as a registered user, click on <a href="/">link</a>'));
-    /* do something */
+  if (!form_get_error()) {
+    drupal_set_message(t('Hello! To see the site as a registered user, click on <a href="/">link</a>.'));
+    hide($form);
   }
+  /* do something */
   $commands[] = ajax_command_html('#ajax-login-messages', theme('status_messages'));
   return array('#type' => 'ajax', '#commands' => $commands);
 }
