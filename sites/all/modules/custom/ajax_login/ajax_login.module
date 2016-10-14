@@ -5,13 +5,14 @@
  * Reworked standard login form to ajax.
  */
 
-module_load_include('inc', 'ajax_login', 'includes/ajax_login.callback');
+require_once('includes/ajax_login.callback.inc');
 /**
  * Implements hook_form_alter().
  */
 function ajax_login_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'user_login_block':
+      /*$form['files'] = '/includes/ajax_login.callback.inc';*/
       $registration_allowed = variable_get('user_register');
       if ($registration_allowed) {
         $user_register_link = array(
